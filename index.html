@@ -4,131 +4,397 @@
   <meta charset="UTF-8">
   <title>Jonathan Nemitz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --faint: #e8e4df;
+      --accent: #b05c3a;
+      --bg: #faf8f5;
+      --card: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.7;
-      color: #222;
-      background: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 28px 100px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 56px;
+    }
+
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--faint);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+    }
+
+    .header-text {
+      padding-top: 8px;
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 50px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 5px;
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 6px;
     }
 
     .subtitle {
-      color: #666;
-      margin-bottom: 15px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .meta {
-      color: #888;
+    .affiliation {
       font-size: 14px;
+      color: var(--muted);
       margin-bottom: 20px;
     }
 
-    .links a {
-      margin-right: 15px;
-      text-decoration: none;
-      color: #0066cc;
+    /* ── Links row ── */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--faint);
+      border-radius: 20px;
+      padding: 5px 13px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: #fff8f5;
+    }
+
+      .edu-item {
+    margin-bottom: 20px;
+  }
+  .edu-item:last-child {
+    margin-bottom: 0;
+  }
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .edu-degree {
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .edu-year {
+    font-size: 13px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .edu-place {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .edu-note {
+    font-size: 13px;
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+    /* ── Section headings ── */
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    section {
+      margin-bottom: 52px;
+    }
+
+    p {
+      font-size: 15px;
+      color: #333;
+    }
+
+    /* ── Paper card ── */
     .paper {
-      margin-top: 25px;
+      background: var(--card);
+      border: 1px solid var(--faint);
+      border-radius: 10px;
+      padding: 22px 24px;
     }
 
     .paper-title {
-      font-weight: bold;
-      font-size: 18px;
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin-bottom: 8px;
     }
 
     .authors {
-      color: #444;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .authors strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .paper p {
       font-size: 14px;
-      margin: 5px 0;
+      color: #555;
+      margin-bottom: 14px;
+    }
+
+    .paper-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .paper-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .paper-links a {
-      margin-right: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--accent);
+      border: 1px solid #e8d0c5;
+      border-radius: 4px;
+      padding: 3px 10px;
+      transition: background 0.15s;
+    }
+
+    .paper-links a:hover {
+      background: #fdf0eb;
+    }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 14px;
     }
 
-    img {
-      width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
+    .contact-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      width: 72px;
+      flex-shrink: 0;
+    }
+
+    .contact-row a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--faint);
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .contact-row a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── Icon SVGs ── */
+    .icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      opacity: 0.65;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+      .links { justify-content: center; }
+      .contact-row { flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
+<div class="page">
 
-<h1>Jonathan Nemitz</h1>
+  <!-- ── Header ── -->
+  <header>
+    <img src="profile_image.jpeg" alt="Jonathan Nemitz" class="profile-img">
+    <div class="header-text">
+      <h1>Jonathan Nemitz</h1>
+      <div class="subtitle">Machine Learning · Vision-Language Models · Human-AI Interaction</div>
+      <div class="affiliation">MS student — University of Tübingen &nbsp;·&nbsp; 2023–present</div>
+      <div class="links">
+        <!-- Replace YOUR_USERNAME with your actual GitHub username -->
+        <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <!-- Replace with your actual LinkedIn URL -->
+        <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <!-- Replace with your actual student email -->
+        <a href="mailto:j.nemitz@student.uni-tuebingen.de">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+  </header>
 
-<div class="subtitle">
-Machine Learning Engineer · Vision-Language Models · Human-AI Interaction
+  <!-- ── Education ── -->
+  <section>
+    <h2>Education</h2>
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="edu-degree">MSc Machine Learning</span>
+        <span class="edu-year">2022 – 2026</span>
+      </div>
+      <div class="edu-place">University of Tübingen</div>
+      <div class="edu-note">Thesis completed March 2026</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-header">
+        <span class="edu-degree">BSc Bioinformatics</span>
+        <span class="edu-year">2019 – 2022</span>
+      </div>
+      <div class="edu-place">University of Tübingen</div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section>
+    <h2>About</h2>
+    <p>
+      I am a Machine Learning Engineer focusing on vision-language models and human-AI interaction.
+      My research investigates how multimodal models interpret visual concepts and how this compares
+      to human perception — probing the gap between model introspection and model behavior.
+    </p>
+  </section>
+
+  <!-- ── Research ── -->
+  <section>
+    <h2>Research</h2>
+    <div class="paper">
+      <div class="paper-title">VLMs Don't Follow Their Own Introspective Reasoning: When to Call an Apple Red, but Humans Do</div>
+      <div class="authors">
+        <strong>Jonathan Nemitz</strong>, Michal Golovanevsky, Carsten Eickhoff,
+        Junyi Jessy Li, Kyle Mahowald, William Rudman
+      </div>
+      <p>
+        We investigate how humans and vision-language models attribute color under controlled
+        visual conditions. Our results reveal systematic differences between human judgments
+        and model predictions, particularly in how models rely on introspective reasoning.
+      </p>
+      <div class="paper-meta">Under review · 2026</div>
+      <div class="paper-links">
+        <a href="#">Paper</a>
+        <a href="#">OpenReview</a>
+        <a href="#">Code</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ── -->
+  <section>
+    <h2>Projects</h2>
+    <p>
+      Experiments with vision-language models including Qwen3-VL, LLaVA-NeXT, and GPT-4o,
+      focusing on color perception, reasoning, and model behavior under controlled stimuli.
+    </p>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section>
+    <h2>Contact</h2>
+    <p style="margin-bottom: 18px;">Feel free to reach out for collaborations or questions.</p>
+    <div class="contact-grid">
+      <div class="contact-row">
+        <span class="contact-label">Academic</span>
+        <!-- Replace with your actual student email -->
+        <a href="mailto:j.nemitz@student.uni-tuebingen.de">jonathan.nemitz@student.uni-tuebingen.de</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">GitHub</span>
+        <a href="https://github.com/jonnemi" target="_blank" rel="noopener">github.com/YOUR_USERNAME</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin.com/in/YOUR_USERNAME</a>
+      </div>
+    </div>
+  </section>
+
 </div>
-
-<div class="meta">
-MS student, Machine Learning<br>
-University of Tübingen (2023 – Present)
-</div>
-
-<h2>About</h2>
-<p>
-I am a Machine Learning Engineer focusing on vision-language models and human-AI interaction.
-My research investigates how multimodal models interpret visual concepts and how this compares to human perception.
-</p>
-
-<h2>Research</h2>
-
-<div class="paper">
-
-  <div class="paper-title">
-    VLMs Don't Follow Their Own Introspective Reasoning: When to Call an Apple Red, but Humans Do
-  </div>
-
-  <div class="authors">
-    Jonathan Nemitz, Michal Golovanevsky, Carsten Eickhoff,<br>
-    Junyi Jessy Li, Kyle Mahowald, William Rudman
-  </div>
-
-  <div class="paper-links">
-    <a href="#">Paper</a>
-    <a href="#">OpenReview</a>
-    <a href="#"> Code</a>
-  </div>
-
-  <p>
-  We investigate how humans and vision-language models attribute color under controlled visual conditions.
-  Our results reveal systematic differences between human judgments and model predictions, particularly in how models rely on introspective reasoning.
-  </p>
-
-  <p style="color:#777; font-size:14px;">
-  Under review (2026)
-  </p>
-
-</div>
-
-<h2>Projects</h2>
-<p>
-Experiments with vision-language models including Qwen3-VL, LLaVA-NeXT, and GPT-4o, focusing on color perception, reasoning, and model behavior under controlled stimuli.
-</p>
-
-<h2>Contact</h2>
-<p>
-Feel free to reach out for collaborations or questions.
-</p>
-
 </body>
 </html>
